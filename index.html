@@ -7,31 +7,34 @@
     <title>Practica 4 - Appshell</title>
 </head>
 <body onload="getData()">
-<div class="grid md:grid-cols-3 sm:grid-cols-1 h-screen place-items-center">
-    <div class="flex justify-content-center" id="root"></div>
-</div>
-<script type="text/javascript">
-    function getData() {
+   <div class="grid h-screen place-items-center">
+      <div class="grid sm:grid-cols-1 md:grid-cols-3" id="root"></div>
+    </div>
+    <script type="text/javascript">
+      function getData() {
         let divElement = document.getElementById("root");
         fetch(`https://reqres.in/api/users?page=1`)
-            .then((res) => res.json())
-            .then((data) => {
-                data.data.map((o, i) => {
-                    divElement.insertAdjacentHTML(
-                        "beforebegin",
-                        `
-            <div class="card w-auto bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/225/arch" /></figure>
-            <div class="card-body">
-            <h2 class="card-title">${o.first_name} ${o.last_name}</h2>
-        <p>${o.email}</p>
-        </div>
-        </div>
-            `);
-                });
+          .then((res) => res.json())
+          .then((data) => {
+            data.data.map((o, i) => {
+              divElement.insertAdjacentHTML(
+                "afterbegin",
+                `
+                <div class="card w-auto bg-base-100 shadow-xl image-full m-5">
+                    <figure>
+                        <img src="https://placeimg.com/400/225/arch" alt="Persons" />
+                    </figure>
+                    <div class="card-body">
+                        <h2 class="card-title">${o.first_name} ${o.last_name}</h2>
+                        <p>${o.email}</p>
+                    </div>
+                </div>
+                `
+              );
             });
-    }
-</script>
-<script src="./js/app.js"></script>
+          });
+      }
+    </script>
+    <script src="./js/app.js"></script>
 </body>
 </html>
